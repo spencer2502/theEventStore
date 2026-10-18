@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #161221;
+  --pink: #FF3E7F;
+  --blue: #3B5BFF;
+  --lime: #C6F135;
+  --yellow: #FFC72C;
+  --purple: #8C52FF;
+  --panel-bg: #FFFDF8;
+}
+
+body {
+  color: var(--ink);
+  background-color: var(--panel-bg);
+  min-height: 100vh;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #FFFDF8;
+  border-left: 2px solid #161221;
+}
+::-webkit-scrollbar-thumb {
+  background: #FF3E7F;
+  border: 2px solid #161221;
+  border-radius: 9999px;
+}
+
+/* Sticker Panel */
+.sticker-panel {
+  background-color: var(--panel-bg);
+  border: 3px solid var(--ink);
+  border-radius: 24px;
+  box-shadow: 8px 8px 0px var(--ink);
+}
+
+.sticker-panel-sm {
+  background-color: var(--panel-bg);
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  box-shadow: 5px 5px 0px var(--ink);
+}
+
+/* Funky Buttons */
+.btn-funky {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Baloo 2', cursive, sans-serif;
+  font-weight: 700;
+  border: 3px solid var(--ink);
+  border-radius: 9999px;
+  box-shadow: 4px 4px 0px var(--ink);
+  transition: transform 0.12s ease-in-out, box-shadow 0.12s ease-in-out;
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn-funky:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--ink);
+}
+
+.btn-funky:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px var(--ink);
+}
+
+.btn-funky:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: 2px 2px 0px var(--ink);
+}
+
+/* Input Fields */
+.funky-input {
+  background-color: #FFFDF8;
+  border: 3px solid var(--ink);
+  border-radius: 14px;
+  padding: 0.65rem 1rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  color: var(--ink);
+  box-shadow: 3px 3px 0px var(--ink);
+  outline: none;
+  transition: all 0.15s ease;
+}
+
+.funky-input:focus {
+  border-color: var(--pink);
+  box-shadow: 5px 5px 0px var(--ink);
+}
+
+/* Category Color Badge Helpers */
+.category-bg-yellow {
+  background-color: var(--yellow);
+}
+.category-bg-pink {
+  background-color: var(--pink);
+}
+.category-bg-blue {
+  background-color: var(--blue);
+}
+.category-bg-lime {
+  background-color: var(--lime);
+}
+.category-bg-purple {
+  background-color: var(--purple);
+}
