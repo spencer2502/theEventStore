@@ -58,9 +58,11 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-md sticker-panel p-6 sm:p-8 shadow-funky-lg bg-panel-bg">
         {/* Header */}
         <div className="text-center mb-6">
-          <div className="w-14 h-14 mx-auto rounded-2xl bg-yellow border-3 border-ink flex items-center justify-center shadow-funky mb-3">
-            <span className="text-2xl">🎪</span>
-          </div>
+          <img
+            src="/logo.png"
+            alt="THE EVENT STORE"
+            className="h-16 mx-auto object-contain mb-3"
+          />
           <h1 className="font-heading font-extrabold text-3xl text-ink tracking-tight">
             Admin Login
           </h1>
@@ -90,7 +92,7 @@ export default function AdminLoginPage() {
               <input
                 type="email"
                 required
-                placeholder="admin@theeventstore.com"
+                placeholder="chayen.jain@eventstore.in"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full funky-input pl-10 text-sm"
@@ -137,22 +139,17 @@ export default function AdminLoginPage() {
           </button>
         </form>
 
-        {/* Demo Quick-Fill Buttons */}
+        {/* Quick-Fill Button */}
         <div className="mt-6 pt-5 border-t-2 border-ink">
-          <span className="text-[11px] font-extrabold text-gray-600 uppercase tracking-wider block text-center mb-2">
-            Demo Credentials (Click to fill):
-          </span>
-          <div className="grid grid-cols-1 gap-2">
-            <button
-              type="button"
-              onClick={() =>
-                handleQuickFill("admin@theeventstore.com", "Admin123!")
-              }
-              className="btn-funky bg-yellow text-ink py-1.5 text-[11px] text-center"
-            >
-              Fill Admin Credentials
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() =>
+              handleQuickFill("chayen.jain@eventstore.in", "chayen.2904")
+            }
+            className="w-full btn-funky bg-yellow text-ink py-2 text-xs text-center"
+          >
+            Quick Fill Admin Credentials
+          </button>
         </div>
       </div>
     </div>

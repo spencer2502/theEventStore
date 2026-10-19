@@ -32,17 +32,17 @@ async function seed() {
 
   // 1. Create Users
   const salt = await bcrypt.genSalt(10);
-  const adminPasswordHash = await bcrypt.hash("Admin123!", salt);
+  const adminPasswordHash = await bcrypt.hash("chayen.2904", salt);
 
   const admin = await User.create({
-    name: "Alex StoreAdmin",
-    email: "admin@theeventstore.com",
+    name: "Chayen Jain",
+    email: "chayen.jain@eventstore.in",
     passwordHash: adminPasswordHash,
     role: "admin",
     isActive: true,
   });
 
-  console.log("👤 Created 1 default admin user.");
+  console.log("👤 Created admin user: chayen.jain@eventstore.in");
 
   // 2. Create Categories with brand colors
   const categoriesData = [
@@ -353,7 +353,7 @@ async function seed() {
   console.log("🎉 SEED COMPLETED SUCCESSFULLY!");
   console.log("------------------------------------------------------");
   console.log("Login credentials:");
-  console.log("Admin: admin@theeventstore.com / Admin123!");
+  console.log("Admin: chayen.jain@eventstore.in / chayen.2904");
   console.log("======================================================\n");
 
   process.exit(0);
