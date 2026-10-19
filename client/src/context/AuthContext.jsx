@@ -40,6 +40,7 @@ export function AuthProvider({ children }) {
     try {
       await api.post('/auth/logout');
     } finally {
+      localStorage.removeItem('token');
       setUser(null);
     }
   };

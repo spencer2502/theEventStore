@@ -93,7 +93,6 @@ const saleSchema = new mongoose.Schema(
 );
 
 saleSchema.index({ createdAt: -1 });
-saleSchema.index({ billNumber: 1 });
 saleSchema.index({ createdBy: 1 });
 
 module.exports = mongoose.model('Sale', saleSchema);

@@ -27,13 +27,25 @@ app.use(
   })
 );
 
+const cleanClientUrl = CLIENT_URL ? CLIENT_URL.trim().replace(/\/+$/, '') : '';
+
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps, curl, postman) or matching frontend
-      if (!origin || origin === CLIENT_URL || origin.startsWith('http://localhost:')) {
+      // Allow requests with no origin (like mobile apps, curl, postman)
+      if (!origin) return callback(null, true);
+
+      const cleanOrigin = origin.trim().replace(/\/+$/, '');
+
+      if (
+        cleanOrigin === cleanClientUrl ||
+        cleanOrigin.endsWith('.vercel.app') ||
+        cleanOrigin.startsWith('http://localhost:') ||
+        cleanOrigin.startsWith('http://127.0.0.1:')
+      ) {
         callback(null, true);
       } else {
+        console.warn(`[CORS] Blocked request from origin: ${origin}. Expected: ${cleanClientUrl}`);
         callback(new Error(`Origin ${origin} not allowed by CORS`));
       }
     },

@@ -27,7 +27,7 @@ function setAuthCookies(res, accessToken, refreshToken) {
   res.cookie('accessToken', accessToken, {
     httpOnly: true,
     secure: isProduction,
-    sameSite: 'lax',
+    sameSite: isProduction ? 'none' : 'lax',
     maxAge: 15 * 60 * 1000, // 15 mins
   });
 
@@ -35,7 +35,7 @@ function setAuthCookies(res, accessToken, refreshToken) {
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
       secure: isProduction,
-      sameSite: 'lax',
+      sameSite: isProduction ? 'none' : 'lax',
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
   }
@@ -87,6 +87,8 @@ exports.login = async (req, res, next) => {
     res.json({
       success: true,
       message: 'Login successful',
+      token: accessToken,
+      accessToken,
       user: {
         id: user._id,
         name: user.name,
@@ -106,8 +108,15 @@ exports.logout = async (req, res, next) => {
       await User.findByIdAndUpdate(req.user._id, { refreshToken: null });
     }
 
-    res.clearCookie('accessToken');
-    res.clearCookie('refreshToken');
+    const isProduction = process.env.NODE_ENV === 'production';
+    const clearOpts = {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: isProduction ? 'none' : 'lax',
+    };
+
+    res.clearCookie('accessToken', clearOpts);
+    res.clearCookie('refreshToken', clearOpts);
 
     res.json({
       success: true,
@@ -157,11 +166,20 @@ exports.refreshToken = async (req, res) => {
     user.refreshToken = newRefreshToken;
     await user.save();
 
+    const isProduction = process.env.NODE_ENV === 'production';
+    const clearOpts = {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: isProduction ? 'none' : 'lax',
+    };
+
     setAuthCookies(res, accessToken, newRefreshToken);
 
     res.json({
       success: true,
       message: 'Token refreshed',
+      token: accessToken,
+      accessToken,
       user: {
         id: user._id,
         name: user.name,
@@ -170,8 +188,14 @@ exports.refreshToken = async (req, res) => {
       },
     });
   } catch (error) {
-    res.clearCookie('accessToken');
-    res.clearCookie('refreshToken');
+    const isProduction = process.env.NODE_ENV === 'production';
+    const clearOpts = {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: isProduction ? 'none' : 'lax',
+    };
+    res.clearCookie('accessToken', clearOpts);
+    res.clearCookie('refreshToken', clearOpts);
     return res.status(401).json({
       success: false,
       message: 'Session expired. Please log in again.',
