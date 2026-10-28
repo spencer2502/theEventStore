@@ -3,114 +3,198 @@
 @tailwind utilities;
 
 :root {
-  --ink: #161221;
-  --pink: #FF3E7F;
-  --blue: #3B5BFF;
-  --lime: #C6F135;
-  --yellow: #FFC72C;
-  --purple: #8C52FF;
-  --panel-bg: #FFFDF8;
+  --ink: #1A181E;
+  --crimson: #B21818;
+  --crimson-dark: #8E1313;
+  --crimson-light: #FDF4F4;
+  --pink: #B21818;
+  --blue: #8E1313;
+  --lime: #A31C23;
+  --yellow: #FBF7F4;
+  --purple: #66161C;
+  --panel-bg: #FFFFFF;
+  --card-border: #E8E3DC;
 }
 
 body {
   color: var(--ink);
-  background-color: var(--panel-bg);
+  background-color: #FDFCF9;
   min-height: 100vh;
+  font-family: 'Plus Jakarta Sans', 'Space Grotesk', sans-serif;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #FFFDF8;
-  border-left: 2px solid #161221;
+  background: #FDFCF9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #FF3E7F;
-  border: 2px solid #161221;
+  background: #C4A2A2;
   border-radius: 9999px;
 }
+::-webkit-scrollbar-thumb:hover {
+  background: #B21818;
+}
 
-/* Sticker Panel */
+/* Luxury Card Panels */
 .sticker-panel {
-  background-color: var(--panel-bg);
-  border: 3px solid var(--ink);
-  border-radius: 24px;
-  box-shadow: 8px 8px 0px var(--ink);
+  background-color: #FFFFFF;
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  box-shadow: 0 4px 20px -2px rgba(26, 24, 30, 0.05), 0 1px 4px -1px rgba(26, 24, 30, 0.03);
 }
 
 .sticker-panel-sm {
-  background-color: var(--panel-bg);
-  border: 3px solid var(--ink);
-  border-radius: 18px;
-  box-shadow: 5px 5px 0px var(--ink);
+  background-color: #FFFFFF;
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  box-shadow: 0 2px 10px -1px rgba(26, 24, 30, 0.04);
 }
 
-/* Funky Buttons */
+.elegant-card {
+  background-color: #FFFFFF;
+  border: 1px solid #EAE5DF;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px -2px rgba(26, 24, 30, 0.06);
+}
+
+/* Primary Crimson & Elegant Buttons */
+.btn-crimson {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #B21818;
+  color: #FFFFFF;
+  border: 1px solid #B21818;
+  border-radius: 9999px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(178, 24, 24, 0.25);
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  user-select: none;
+}
+.btn-crimson:hover:not(:disabled) {
+  background-color: #8E1313;
+  border-color: #8E1313;
+  box-shadow: 0 4px 14px rgba(178, 24, 24, 0.35);
+}
+.btn-crimson:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn-primary-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFFFFF;
+  color: #B21818;
+  border: 1.5px solid #B21818;
+  border-radius: 9999px;
+  font-weight: 700;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+}
+.btn-primary-outline:hover:not(:disabled) {
+  background-color: #FDF4F4;
+}
+
+/* Button overrides for existing classes */
 .btn-funky {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Baloo 2', cursive, sans-serif;
+  font-family: inherit;
   font-weight: 700;
-  border: 3px solid var(--ink);
+  border: 1.5px solid var(--ink);
   border-radius: 9999px;
-  box-shadow: 4px 4px 0px var(--ink);
-  transition: transform 0.12s ease-in-out, box-shadow 0.12s ease-in-out;
+  box-shadow: 2px 2px 0px var(--ink);
+  transition: all 0.15s ease-in-out;
   cursor: pointer;
   user-select: none;
 }
-
 .btn-funky:hover:not(:disabled) {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px var(--ink);
+  transform: translateY(-1px);
+  box-shadow: 3px 3px 0px var(--ink);
 }
-
 .btn-funky:active:not(:disabled) {
-  transform: translate(2px, 2px);
+  transform: translateY(1px);
   box-shadow: 1px 1px 0px var(--ink);
 }
-
 .btn-funky:disabled {
   opacity: 0.55;
   cursor: not-allowed;
-  box-shadow: 2px 2px 0px var(--ink);
 }
 
-/* Input Fields */
-.funky-input {
-  background-color: #FFFDF8;
-  border: 3px solid var(--ink);
-  border-radius: 14px;
+/* Clean Input Fields */
+.funky-input,
+.elegant-input {
+  background-color: #FFFFFF;
+  border: 1.5px solid #D8D2C9;
+  border-radius: 12px;
   padding: 0.65rem 1rem;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: inherit;
   font-weight: 500;
   color: var(--ink);
-  box-shadow: 3px 3px 0px var(--ink);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   outline: none;
-  transition: all 0.15s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.funky-input:focus,
+.elegant-input:focus {
+  border-color: #B21818;
+  box-shadow: 0 0 0 3px rgba(178, 24, 24, 0.12);
 }
 
-.funky-input:focus {
-  border-color: var(--pink);
-  box-shadow: 5px 5px 0px var(--ink);
-}
+/* Category Badge Helpers */
+.category-bg-yellow { background-color: #FAF4F0; color: #8E1313; border: 1px solid #EBDDD5; }
+.category-bg-pink   { background-color: #FDF4F4; color: #B21818; border: 1px solid #F6D8D8; }
+.category-bg-blue   { background-color: #F8F2F2; color: #7A141A; border: 1px solid #EED4D6; }
+.category-bg-lime   { background-color: #FCF5F5; color: #A31C23; border: 1px solid #F5DADA; }
+.category-bg-purple { background-color: #F5EFEF; color: #5C1419; border: 1px solid #E7D5D6; }
 
-/* Category Color Badge Helpers */
-.category-bg-yellow {
-  background-color: var(--yellow);
-}
-.category-bg-pink {
-  background-color: var(--pink);
-}
-.category-bg-blue {
-  background-color: var(--blue);
-}
-.category-bg-lime {
-  background-color: var(--lime);
-}
-.category-bg-purple {
-  background-color: var(--purple);
+/* ============================================================
+   SINGLE-PAGE PRINT STYLES FOR OFFICIAL SALES RECEIPT
+   ============================================================ */
+@media print {
+  /* Hide the rest of the web application */
+  body * {
+    visibility: hidden !important;
+  }
+
+  /* Show ONLY the receipt container and its descendants */
+  #printable-receipt,
+  #printable-receipt * {
+    visibility: visible !important;
+  }
+
+  #printable-receipt {
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 20px 24px !important;
+    background: #FFFFFF !important;
+    color: #1A181E !important;
+    border: none !important;
+    box-shadow: none !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Guarantee single page print / PDF without overflow */
+  @page {
+    size: A4 portrait;
+    margin: 12mm 15mm;
+  }
+
+  /* Explicitly hide all buttons and interactive elements during print */
+  .print\:hidden {
+    display: none !important;
+  }
 }

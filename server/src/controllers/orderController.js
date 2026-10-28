@@ -1,6 +1,5 @@
 const Order = require('../models/Order');
 const Product = require('../models/Product');
-const { sendTelegramOrderNotification } = require('../config/telegram');
 const { logAction } = require('../utils/auditLogger');
 
 function generateOrderNumber() {
@@ -179,18 +178,6 @@ exports.createStorefrontOrder = async (req, res, next) => {
       status: 'pending',
       notes: notes || '',
     });
-
-    // Send Telegram Notification in background
-    let telegramSent = false;
-    try {
-      telegramSent = await sendTelegramOrderNotification(order);
-      if (telegramSent) {
-        order.telegramNotified = true;
-        await order.save();
-      }
-    } catch (tErr) {
-      console.error('Telegram notification error:', tErr.message);
-    }
 
     // Generate WhatsApp deep link
     const whatsappUrl = buildWhatsAppUrl(order);

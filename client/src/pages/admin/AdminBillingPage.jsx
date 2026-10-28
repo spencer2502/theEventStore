@@ -263,30 +263,29 @@ ${itemsSummary}
   return (
     <div className="space-y-6">
       {/* Header Banner */}
-      <div className="sticker-panel p-5 bg-lime/30 shadow-funky flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="bg-white rounded-2xl border border-[#EAE5DF] p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <div className="inline-flex items-center gap-1.5 text-xs font-bold text-ink uppercase tracking-wider mb-0.5">
-            <Receipt size={16} /> Counter Point of Sale
+          <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#B21818] uppercase tracking-wider mb-0.5">
+            <Receipt size={15} /> Counter Point of Sale
           </div>
-          <h2 className="font-heading font-extrabold text-2xl sm:text-3xl text-ink">
+          <h2 className="font-heading font-bold text-2xl text-[#1A181E]">
             POS Billing & Stock Decrement
           </h2>
-          <p className="text-xs text-gray-700">
-            Search products, adjust the actual sold price, and finalize the bill
-            to atomically decrement stock.
+          <p className="text-xs text-gray-500">
+            Search products, adjust actual sold price, and finalize the bill to atomically decrement stock.
           </p>
         </div>
 
         {linkedOrderId && (
-          <div className="bg-yellow px-3.5 py-1.5 rounded-full border-2 border-ink shadow-[2px_2px_0px_#161221] text-xs font-bold text-ink shrink-0">
+          <div className="bg-[#FAF6F2] px-3.5 py-1.5 rounded-full border border-[#E8D0D0] text-xs font-semibold text-[#B21818] shrink-0">
             🔗 Linked to Online Order Enquiry
           </div>
         )}
       </div>
 
       {errorMsg && (
-        <div className="p-3.5 rounded-xl bg-red-100 border-2 border-[#ff4d4d] text-ink text-xs font-bold flex items-center gap-2 shadow-[2px_2px_0px_#161221]">
-          <AlertCircle size={18} className="text-[#ff4d4d] shrink-0" />
+        <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-800 text-xs font-medium flex items-center gap-2">
+          <AlertCircle size={16} className="text-red-600 shrink-0" />
           <span>{errorMsg}</span>
         </div>
       )}
@@ -294,12 +293,12 @@ ${itemsSummary}
       {/* POS Grid: Left is Product Search/Selector, Right is Current Bill */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Column: Product Search & Selector (7 cols) */}
-        <div className="lg:col-span-7 sticker-panel p-5 bg-white shadow-funky space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b-2 border-ink">
-            <h3 className="font-heading font-extrabold text-xl text-ink">
+        <div className="lg:col-span-7 bg-white rounded-2xl border border-[#EAE5DF] p-5 shadow-sm space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-[#F0ECE6]">
+            <h3 className="font-heading font-bold text-lg text-[#1A181E]">
               Select Products
             </h3>
-            <span className="text-xs font-bold text-gray-500">
+            <span className="text-xs font-medium text-gray-400">
               {filteredProducts.length} items available
             </span>
           </div>
@@ -398,17 +397,17 @@ ${itemsSummary}
         </div>
 
         {/* Right Column: Current Bill & Checkout (5 cols) */}
-        <div className="lg:col-span-5 sticker-panel p-5 bg-panel-bg shadow-funky flex flex-col justify-between">
+        <div className="lg:col-span-5 bg-white rounded-2xl border border-[#EAE5DF] p-5 shadow-sm flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between pb-3 mb-3 border-b-2 border-ink">
-              <h3 className="font-heading font-extrabold text-xl text-ink">
+            <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#F0ECE6]">
+              <h3 className="font-heading font-bold text-lg text-[#1A181E]">
                 Current Bill ({billItems.length} items)
               </h3>
               {billItems.length > 0 && (
                 <button
                   type="button"
                   onClick={() => setBillItems([])}
-                  className="text-xs font-bold text-gray-500 hover:text-red-600"
+                  className="text-xs font-semibold text-gray-400 hover:text-[#B21818] transition-colors"
                 >
                   Clear All
                 </button>
@@ -417,12 +416,12 @@ ${itemsSummary}
 
             {/* Line Items List */}
             {billItems.length === 0 ? (
-              <div className="py-16 text-center border-2 border-dashed border-ink/40 rounded-2xl bg-white/50 p-6">
-                <Receipt size={36} className="mx-auto text-gray-400 mb-2" />
-                <p className="font-heading font-bold text-base text-gray-700">
+              <div className="py-16 text-center border border-dashed border-gray-200 rounded-xl bg-[#FAF8F5] p-6">
+                <Receipt size={32} className="mx-auto text-gray-400 mb-2" />
+                <p className="font-medium text-sm text-gray-600">
                   No items added yet
                 </p>
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-gray-400 mt-0.5">
                   Click products on the left to add them to this bill.
                 </p>
               </div>
@@ -431,7 +430,7 @@ ${itemsSummary}
                 {billItems.map((item, idx) => (
                   <div
                     key={idx}
-                    className="p-3 bg-white rounded-xl border-2 border-ink shadow-[2px_2px_0px_#161221] space-y-2"
+                    className="p-3 bg-[#FAF8F5] rounded-xl border border-gray-200 space-y-2"
                   >
                     <div className="flex items-start justify-between gap-2">
                       <span className="font-heading font-extrabold text-xs text-ink leading-tight truncate">
@@ -621,106 +620,109 @@ ${itemsSummary}
           title="Official Sales Receipt"
           maxWidth="max-w-md"
         >
-          <div className="space-y-4 text-ink print:p-0">
-            {/* Store Receipt Header */}
-            <div className="text-center pb-4 border-b-2 border-dashed border-ink">
-              <img
-                src="/logo.png"
-                alt="THE EVENT STORE"
-                className="h-14 mx-auto object-contain mb-2"
-              />
-              <p className="text-xs text-gray-600">
-                Props & Decor Hire • Official POS Receipt
-              </p>
-              <p className="font-mono text-xs font-bold text-pink mt-1">
-                Receipt #{finalizedSale.billNumber}
-              </p>
-              <p className="text-[11px] text-gray-500">
-                Date: {new Date(finalizedSale.createdAt).toLocaleString()}
-              </p>
-            </div>
-
-            {/* Customer & Cashier Info */}
-            <div className="text-xs font-semibold space-y-1 bg-white p-3 rounded-xl border border-ink">
-              <div className="flex justify-between">
-                <span className="text-gray-500">Customer:</span>
-                <span className="font-bold">{finalizedSale.customerName}</span>
+          <div className="space-y-4 text-ink">
+            {/* The Dedicated Printable Area (Guaranteed 1 page print / PDF) */}
+            <div id="printable-receipt" className="space-y-4 bg-white p-4 rounded-xl border border-gray-200">
+              {/* Store Receipt Header */}
+              <div className="text-center pb-3 border-b border-gray-200">
+                <img
+                  src="/logo.png"
+                  alt="THE EVENT STORE"
+                  className="h-14 mx-auto object-contain mb-1.5"
+                />
+                <h3 className="font-heading font-extrabold text-xl text-ink tracking-tight">
+                  THE EVENT STORE
+                </h3>
+                <p className="text-xs text-gray-600 font-medium">
+                  Props & Decor Hire • Official Sales Receipt
+                </p>
+                <div className="flex items-center justify-between text-[11px] mt-2 pt-2 border-t border-dashed border-gray-200 text-gray-600 font-medium">
+                  <span><strong>Receipt #:</strong> {finalizedSale.billNumber}</span>
+                  <span>{new Date(finalizedSale.createdAt).toLocaleString()}</span>
+                </div>
               </div>
-              {finalizedSale.customerPhone && (
+
+              {/* Customer & Cashier Info */}
+              <div className="text-xs space-y-1.5 bg-[#FAF8F5] p-3 rounded-lg border border-[#EAE5DF]">
                 <div className="flex justify-between">
-                  <span className="text-gray-500">Phone:</span>
-                  <span>{finalizedSale.customerPhone}</span>
+                  <span className="text-gray-500">Customer:</span>
+                  <span className="font-bold text-ink">{finalizedSale.customerName}</span>
                 </div>
-              )}
-              {finalizedSale.customerAddress && (
-                <div className="flex justify-between items-start gap-2">
-                  <span className="text-gray-500 shrink-0">Address:</span>
-                  <span className="font-bold text-right break-words max-w-[240px]">
-                    {finalizedSale.customerAddress}
-                  </span>
-                </div>
-              )}
-              <div className="flex justify-between">
-                <span className="text-gray-500">Payment:</span>
-                <span className="uppercase font-bold">
-                  {finalizedSale.paymentMethod}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-500">Administrator:</span>
-                <span>{finalizedSale.createdByName}</span>
-              </div>
-            </div>
-
-            {/* Line Items */}
-            <div className="space-y-2">
-              <span className="text-xs font-extrabold uppercase text-gray-600 block">
-                Itemized Items
-              </span>
-              <div className="bg-white p-3 rounded-xl border border-ink divide-y divide-gray-200 text-xs">
-                {finalizedSale.items?.map((it, idx) => (
-                  <div
-                    key={idx}
-                    className="py-2 flex justify-between items-center"
-                  >
-                    <div>
-                      <p className="font-bold">{it.name}</p>
-                      <p className="text-[11px] text-gray-500">
-                        {it.quantitySold} x ₹{it.soldPrice?.toFixed(2)}
-                      </p>
-                    </div>
-                    <span className="font-heading font-extrabold text-sm">
-                      ₹{it.subtotal?.toFixed(2)}
+                {finalizedSale.customerPhone && (
+                  <div className="flex justify-between">
+                    <span className="text-gray-500">Phone:</span>
+                    <span className="font-semibold text-ink">{finalizedSale.customerPhone}</span>
+                  </div>
+                )}
+                {finalizedSale.customerAddress && (
+                  <div className="flex justify-between items-start gap-2">
+                    <span className="text-gray-500 shrink-0">Address:</span>
+                    <span className="font-semibold text-right break-words max-w-[240px] text-ink">
+                      {finalizedSale.customerAddress}
                     </span>
                   </div>
-                ))}
+                )}
+                <div className="flex justify-between pt-1 border-t border-gray-200/60">
+                  <span className="text-gray-500">Payment:</span>
+                  <span className="uppercase font-bold text-ink">
+                    {finalizedSale.paymentMethod}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-500">Billed By:</span>
+                  <span className="font-medium text-ink">{finalizedSale.createdByName || "Administrator"}</span>
+                </div>
               </div>
+
+              {/* Line Items */}
+              <div className="space-y-1.5">
+                <span className="text-[11px] font-extrabold uppercase text-gray-500 tracking-wider block">
+                  Itemized Items
+                </span>
+                <div className="divide-y divide-gray-100 text-xs border-y border-gray-200">
+                  {finalizedSale.items?.map((it, idx) => (
+                    <div
+                      key={idx}
+                      className="py-2 flex justify-between items-center"
+                    >
+                      <div className="pr-2">
+                        <p className="font-bold text-ink leading-tight">{it.name}</p>
+                        <p className="text-[11px] text-gray-500">
+                          {it.quantitySold} x ₹{it.soldPrice?.toFixed(2)}
+                        </p>
+                      </div>
+                      <span className="font-bold text-sm text-ink shrink-0">
+                        ₹{it.subtotal?.toFixed(2)}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Total Paid */}
+              <div className="p-3 rounded-lg bg-[#FDF4F4] border border-[#F4D2D2] flex justify-between items-center">
+                <span className="font-heading font-bold text-sm text-gray-800">
+                  TOTAL PAID:
+                </span>
+                <span className="font-heading font-extrabold text-xl text-[#B21818]">
+                  ₹{finalizedSale.totalAmount?.toFixed(2)}
+                </span>
+              </div>
+
+              {/* Official Receipt Footer Note */}
+              <p className="text-[10px] text-gray-400 text-center pt-1">
+                Thank you for choosing THE EVENT STORE. For enquiries: +91 89626 90000
+              </p>
             </div>
 
-            {/* Total */}
-            <div className="p-3 rounded-xl bg-yellow/30 border-2 border-ink flex justify-between items-center">
-              <span className="font-heading font-extrabold text-base">
-                TOTAL PAID:
-              </span>
-              <span className="font-heading font-extrabold text-2xl">
-                ₹{finalizedSale.totalAmount?.toFixed(2)}
-              </span>
-            </div>
-
-            {/* Inventory Status confirmation badge */}
-            <div className="p-2.5 rounded-xl bg-lime/40 border border-ink text-center text-xs font-bold text-green-900 flex items-center justify-center gap-1.5">
-              <CheckCircle2 size={16} />
-              <span>Product inventory atomically decremented in database.</span>
-            </div>
-
-            {/* WhatsApp Bill Action Buttons */}
-            <div className="space-y-2 pt-1">
+            {/* Actions (HIDDEN WHEN PRINTING) */}
+            <div className="print:hidden space-y-2 pt-2">
               <button
                 type="button"
                 onClick={() => handleSendWhatsAppBill(finalizedSale, "customer")}
-                className="w-full btn-funky bg-[#25D366] text-white px-4 py-2.5 text-xs flex items-center justify-center gap-2 font-extrabold hover:bg-[#20bd5a]"
+                className="w-full btn-funky bg-[#25D366] text-white px-4 py-2.5 text-xs flex items-center justify-center gap-2 font-bold hover:bg-[#20bd5a]"
               >
-                <MessageSquare size={16} />
+                <MessageSquare size={15} />
                 <span>
                   {finalizedSale.customerPhone
                     ? `Send Bill to Customer on WhatsApp (${finalizedSale.customerPhone})`
@@ -736,25 +738,24 @@ ${itemsSummary}
                 <MessageCircle size={14} className="text-[#25D366]" />
                 <span>Send Copy to Store WhatsApp (8962690000)</span>
               </button>
-            </div>
 
-            {/* Print & Close Actions */}
-            <div className="pt-2 flex gap-2">
-              <button
-                type="button"
-                onClick={() => window.print()}
-                className="btn-funky bg-yellow text-ink px-4 py-2.5 text-xs flex-1 flex items-center justify-center gap-1.5"
-              >
-                <Printer size={15} />
-                <span>Print Receipt</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setIsReceiptOpen(false)}
-                className="btn-funky bg-white text-ink px-4 py-2.5 text-xs flex-1"
-              >
-                Close & Next Sale
-              </button>
+              <div className="pt-1 flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => window.print()}
+                  className="btn-funky bg-[#B21818] text-white px-4 py-2.5 text-xs flex-1 flex items-center justify-center gap-1.5 font-bold hover:bg-[#8E1313]"
+                >
+                  <Printer size={15} />
+                  <span>Download / Print Bill</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsReceiptOpen(false)}
+                  className="btn-funky bg-white text-ink px-4 py-2.5 text-xs flex-1"
+                >
+                  Close & Next Sale
+                </button>
+              </div>
             </div>
           </div>
         </Modal>

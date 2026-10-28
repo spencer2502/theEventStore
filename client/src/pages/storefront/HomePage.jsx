@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Sparkles, ArrowRight, Loader2, PartyPopper } from 'lucide-react';
+import { Sparkles, ArrowRight, Loader2, PartyPopper, MessageCircle } from 'lucide-react';
 import HeroSection from '../../components/storefront/HeroSection';
 import ProductCard from '../../components/storefront/ProductCard';
 import FunkyButton from '../../components/common/FunkyButton';
@@ -28,27 +28,27 @@ export default function HomePage() {
   };
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-8">
       {/* Hero Section */}
       <HeroSection />
 
       {/* Featured Bestsellers Section */}
-      <section className="w-full py-10 sm:py-14">
+      <section className="w-full py-8 sm:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-4 border-b-3 border-ink">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-4 border-b border-[#EAE6DF]">
             <div>
-              <div className="inline-flex items-center gap-1.5 text-xs font-bold text-pink uppercase tracking-wider mb-1">
-                <PartyPopper size={16} /> Most Loved Event Props
+              <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#B21818] uppercase tracking-wider mb-1">
+                <Sparkles size={14} /> Most Requested Items
               </div>
-              <h2 className="font-heading font-extrabold text-3xl sm:text-4xl text-ink tracking-tight">
+              <h2 className="font-heading font-bold text-2xl sm:text-3xl text-[#1A181E] tracking-tight">
                 Featured & Bestsellers
               </h2>
             </div>
 
             <Link to="/categories">
-              <FunkyButton variant="yellow" size="md">
+              <FunkyButton variant="white" size="md">
                 <span>View Full Catalog</span>
-                <ArrowRight size={16} strokeWidth={3} />
+                <ArrowRight size={15} />
               </FunkyButton>
             </Link>
           </div>
@@ -56,12 +56,12 @@ export default function HomePage() {
           {/* Products Grid */}
           {loading ? (
             <div className="py-20 flex flex-col items-center justify-center gap-3">
-              <Loader2 size={36} className="text-pink animate-spin" />
-              <span className="font-heading font-bold text-lg text-ink">Loading awesome props...</span>
+              <Loader2 size={32} className="text-[#B21818] animate-spin" />
+              <span className="font-medium text-sm text-gray-600">Loading catalog...</span>
             </div>
           ) : featuredProducts.length === 0 ? (
-            <div className="text-center py-16">
-              <p className="text-gray-600 font-semibold">No featured props found right now.</p>
+            <div className="text-center py-16 bg-white rounded-xl border border-gray-100">
+              <p className="text-gray-500 font-medium">No featured props found right now.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
@@ -71,14 +71,17 @@ export default function HomePage() {
             </div>
           )}
 
-          {/* Banner inside featured section */}
-          <div className="mt-12 p-6 rounded-3xl bg-lime/40 border-3 border-ink shadow-funky flex flex-col md:flex-row items-center justify-between gap-4">
+          {/* Custom Package Callout Banner */}
+          <div className="mt-12 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-[#FAF6F2] to-[#FFF5F5] border border-[#EAD5D5] shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-              <h3 className="font-heading font-extrabold text-xl sm:text-2xl text-ink">
-                Need customized setup or multi-day rental?
+              <span className="text-[11px] font-bold text-[#B21818] uppercase tracking-widest block mb-1">
+                Concierge Assistance
+              </span>
+              <h3 className="font-heading font-bold text-xl sm:text-2xl text-[#1A181E]">
+                Need a custom setup or multi-day rental?
               </h3>
-              <p className="text-xs sm:text-sm font-medium text-gray-800 mt-1">
-                Our operations team can build custom packages, arrange transport, and set up on-site.
+              <p className="text-xs sm:text-sm font-normal text-gray-600 mt-1 max-w-xl">
+                Our decor operations team can build tailored packages, arrange safe transport, and assist with on-site setup for your celebration.
               </p>
             </div>
             <a
@@ -89,7 +92,8 @@ export default function HomePage() {
               rel="noopener noreferrer"
               className="shrink-0"
             >
-              <FunkyButton variant="pink" size="md">
+              <FunkyButton variant="crimson" size="md" className="gap-2">
+                <MessageCircle size={16} />
                 <span>WhatsApp Operations</span>
               </FunkyButton>
             </a>

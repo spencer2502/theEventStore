@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Search, SlidersHorizontal, Loader2, Sparkles, AlertCircle } from 'lucide-react';
+import { Search, SlidersHorizontal, Loader2, AlertCircle } from 'lucide-react';
 import ProductCard from '../../components/storefront/ProductCard';
 import api from '../../api/client';
 
 const CATEGORIES_LIST = [
-  { slug: 'all', name: 'All Props', colorKey: 'yellow' },
-  { slug: 'lighting', name: 'Lighting', colorKey: 'yellow' },
-  { slug: 'backdrops', name: 'Backdrops', colorKey: 'pink' },
-  { slug: 'balloons', name: 'Balloons', colorKey: 'blue' },
-  { slug: 'tableware', name: 'Tableware', colorKey: 'lime' },
-  { slug: 'furniture', name: 'Furniture', colorKey: 'purple' },
+  { slug: 'all', name: 'All Props' },
+  { slug: 'lighting', name: 'Lighting' },
+  { slug: 'backdrops', name: 'Backdrops' },
+  { slug: 'balloons', name: 'Balloons' },
+  { slug: 'tableware', name: 'Tableware' },
+  { slug: 'furniture', name: 'Furniture' },
 ];
 
 export default function CategoryPage() {
@@ -71,13 +71,13 @@ export default function CategoryPage() {
     <div className="w-full py-6 sm:py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Page Header */}
-        <div className="border-b-3 border-ink pb-6 mb-6">
+        <div className="border-b border-[#EAE6DF] pb-6 mb-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <span className="text-xs font-bold text-pink uppercase tracking-wider block mb-1">
+              <span className="text-xs font-semibold text-[#B21818] uppercase tracking-wider block mb-1">
                 Event Props & Rentals Catalog
               </span>
-              <h1 className="font-heading font-extrabold text-3xl sm:text-5xl text-ink tracking-tight capitalize">
+              <h1 className="font-heading font-bold text-2xl sm:text-4xl text-[#1A181E] tracking-tight capitalize">
                 {currentCategorySlug === 'all' ? 'All Event Props' : `${currentCategorySlug} Collection`}
               </h1>
             </div>
@@ -86,13 +86,13 @@ export default function CategoryPage() {
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               {/* Search input */}
               <div className="relative">
-                <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500" />
+                <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input
                   type="text"
                   placeholder="Search props by name..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="funky-input pl-9 pr-4 py-2 text-xs sm:text-sm w-full sm:w-64"
+                  className="pl-9 pr-4 py-2 text-xs sm:text-sm rounded-lg border border-gray-300 bg-white focus:outline-none focus:border-[#B21818] w-full sm:w-64 transition-colors"
                 />
               </div>
 
@@ -101,19 +101,19 @@ export default function CategoryPage() {
                 <select
                   value={sortOption}
                   onChange={(e) => setSortOption(e.target.value)}
-                  className="funky-input text-xs sm:text-sm py-2 px-3 appearance-none pr-8 cursor-pointer font-bold w-full sm:w-auto"
+                  className="text-xs sm:text-sm py-2 px-3.5 rounded-lg border border-gray-300 bg-white appearance-none pr-8 cursor-pointer font-medium text-gray-700 focus:outline-none focus:border-[#B21818] w-full sm:w-auto transition-colors"
                 >
                   <option value="newest">Sort: Newest First</option>
                   <option value="price_asc">Price: Low to High</option>
                   <option value="price_desc">Price: High to Low</option>
                 </select>
-                <SlidersHorizontal size={14} className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-ink" />
+                <SlidersHorizontal size={13} className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500" />
               </div>
             </div>
           </div>
 
           {/* Category Chips Bar */}
-          <div className="mt-6 flex items-center gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-none">
+          <div className="mt-6 flex items-center gap-2 sm:gap-2.5 overflow-x-auto pb-2 scrollbar-none">
             {CATEGORIES_LIST.map((cat) => {
               const isSelected = currentCategorySlug === cat.slug;
               return (
@@ -121,10 +121,10 @@ export default function CategoryPage() {
                   key={cat.slug}
                   type="button"
                   onClick={() => handleCategorySwitch(cat.slug)}
-                  className={`px-4 py-2 rounded-full font-heading font-extrabold text-xs sm:text-sm border-2 transition-all shrink-0 select-none ${
+                  className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all shrink-0 select-none ${
                     isSelected
-                      ? 'bg-yellow text-ink border-ink shadow-[3px_3px_0px_#161221] scale-105'
-                      : 'bg-white text-ink border-ink shadow-[2px_2px_0px_#161221] hover:bg-lime/30'
+                      ? 'bg-[#B21818] text-white shadow-sm'
+                      : 'bg-white text-gray-700 border border-gray-200 hover:border-[#B21818] hover:text-[#B21818]'
                   }`}
                 >
                   {cat.name}
@@ -135,22 +135,22 @@ export default function CategoryPage() {
         </div>
 
         {/* Products Count Indicator */}
-        <div className="flex items-center justify-between text-xs font-bold text-gray-600 mb-6">
+        <div className="flex items-center justify-between text-xs font-normal text-gray-500 mb-6">
           <span>Showing {filteredProducts.length} items</span>
-          <span className="text-pink">● Click card to view details & gallery</span>
+          <span className="text-gray-400">Click any card to view details</span>
         </div>
 
         {/* Product Cards Grid */}
         {loading ? (
           <div className="py-24 flex flex-col items-center justify-center gap-3">
-            <Loader2 size={36} className="text-pink animate-spin" />
-            <span className="font-heading font-bold text-lg text-ink">Loading props catalog...</span>
+            <Loader2 size={32} className="text-[#B21818] animate-spin" />
+            <span className="font-medium text-sm text-gray-600">Loading props catalog...</span>
           </div>
         ) : filteredProducts.length === 0 ? (
-          <div className="text-center py-20 bg-white/60 rounded-3xl border-2 border-dashed border-ink p-8">
-            <AlertCircle size={40} className="mx-auto text-pink mb-3" />
-            <h3 className="font-heading font-extrabold text-2xl text-ink">No props found</h3>
-            <p className="text-sm text-gray-600 mt-1 max-w-sm mx-auto">
+          <div className="text-center py-20 bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
+            <AlertCircle size={36} className="mx-auto text-gray-400 mb-3" />
+            <h3 className="font-heading font-bold text-xl text-[#1A181E]">No props found</h3>
+            <p className="text-xs sm:text-sm text-gray-500 mt-1 max-w-sm mx-auto">
               {searchTerm
                 ? `No props matched "${searchTerm}". Try a different keyword or category.`
                 : 'No items currently in this category. Check back soon!'}
@@ -159,7 +159,7 @@ export default function CategoryPage() {
               <button
                 type="button"
                 onClick={() => setSearchTerm('')}
-                className="mt-4 btn-funky bg-yellow text-ink px-4 py-2 text-xs"
+                className="mt-4 px-4 py-2 text-xs font-medium rounded-lg bg-[#FAF8F5] border border-gray-300 text-gray-700 hover:text-black"
               >
                 Clear Search
               </button>

@@ -36,26 +36,20 @@ export default function AdminLoginPage() {
     }
   };
 
-  const handleQuickFill = (roleEmail, rolePass) => {
-    setEmail(roleEmail);
-    setPassword(rolePass);
-    setError("");
-  };
-
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center px-4 py-8">
+    <div className="min-h-screen flex flex-col justify-center items-center px-4 py-8 bg-[#FDFCF9]">
       {/* Back to Store link */}
       <div className="mb-4">
         <Link
           to="/"
-          className="btn-funky bg-white text-ink px-4 py-2 text-xs flex items-center gap-1.5"
+          className="btn-primary-outline px-4 py-2 text-xs flex items-center gap-1.5"
         >
           <ArrowLeft size={14} />
           <span>Back to Storefront</span>
         </Link>
       </div>
 
-      <div className="w-full max-w-md sticker-panel p-6 sm:p-8 shadow-funky-lg bg-panel-bg">
+      <div className="w-full max-w-md elegant-card p-6 sm:p-8 bg-white border border-[#E5E0D8] shadow-md rounded-2xl">
         {/* Header */}
         <div className="text-center mb-6">
           <img
@@ -63,17 +57,17 @@ export default function AdminLoginPage() {
             alt="THE EVENT STORE"
             className="h-16 mx-auto object-contain mb-3"
           />
-          <h1 className="font-heading font-extrabold text-3xl text-ink tracking-tight">
-            Admin Login
+          <h1 className="font-heading font-bold text-2xl text-ink tracking-tight">
+            Admin Portal Login
           </h1>
-          <p className="text-xs font-bold text-pink uppercase tracking-wider mt-1">
-            THE EVENT STORE Operations Portal
+          <p className="text-xs font-semibold text-[#8C1D24] uppercase tracking-wider mt-1">
+            Store Management & POS
           </p>
         </div>
 
         {error && (
-          <div className="mb-4 p-3 rounded-xl bg-red-100 border-2 border-[#ff4d4d] text-xs font-bold text-ink flex items-center gap-2 shadow-[2px_2px_0px_#161221]">
-            <AlertCircle size={16} className="text-[#ff4d4d] shrink-0" />
+          <div className="mb-4 p-3 rounded-xl bg-red-50 border border-red-300 text-xs font-medium text-red-800 flex items-center gap-2">
+            <AlertCircle size={16} className="text-red-600 shrink-0" />
             <span>{error}</span>
           </div>
         )}
@@ -81,41 +75,43 @@ export default function AdminLoginPage() {
         {/* Login Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-extrabold text-ink uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-ink uppercase tracking-wider mb-1">
               Email Address
             </label>
             <div className="relative">
               <Mail
                 size={16}
-                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500"
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
               />
               <input
                 type="email"
                 required
-                placeholder="chayen.jain@eventstore.in"
+                placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full funky-input pl-10 text-sm"
+                style={{ paddingLeft: '2.75rem' }}
+                className="w-full elegant-input text-sm"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-extrabold text-ink uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-ink uppercase tracking-wider mb-1">
               Password
             </label>
             <div className="relative">
               <Lock
                 size={16}
-                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500"
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
               />
               <input
                 type="password"
                 required
-                placeholder="••••••••••••"
+                placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full funky-input pl-10 text-sm"
+                style={{ paddingLeft: '2.75rem' }}
+                className="w-full elegant-input text-sm"
               />
             </div>
           </div>
@@ -123,7 +119,7 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full btn-funky bg-lime text-ink py-3 text-base flex items-center justify-center gap-2 mt-2"
+            className="w-full btn-crimson py-3 text-sm flex items-center justify-center gap-2 mt-3 font-bold"
           >
             {loading ? (
               <>
@@ -133,24 +129,11 @@ export default function AdminLoginPage() {
             ) : (
               <>
                 <span>Sign In to Dashboard</span>
-                <ArrowRight size={18} strokeWidth={3} />
+                <ArrowRight size={16} strokeWidth={2.5} />
               </>
             )}
           </button>
         </form>
-
-        {/* Quick-Fill Button */}
-        <div className="mt-6 pt-5 border-t-2 border-ink">
-          <button
-            type="button"
-            onClick={() =>
-              handleQuickFill("chayen.jain@eventstore.in", "chayen.2904")
-            }
-            className="w-full btn-funky bg-yellow text-ink py-2 text-xs text-center"
-          >
-            Quick Fill Admin Credentials
-          </button>
-        </div>
       </div>
     </div>
   );

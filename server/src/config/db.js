@@ -1,20 +1,11 @@
 const mongoose = require('mongoose');
 
-let mongodInstance = null;
-
 async function connectDB() {
   try {
-    let mongoUri = process.env.MONGODB_URI;
+    const mongoUri = process.env.MONGODB_URI;
 
     if (!mongoUri || mongoUri.trim() === '') {
-      if (process.env.NODE_ENV === 'production') {
-        throw new Error('MONGODB_URI is not set in Render Environment variables. Please add MONGODB_URI in Render dashboard.');
-      }
-      console.log('⚡ No MONGODB_URI provided in environment. Starting embedded MongoDB Memory Server for seamless dev/testing...');
-      const { MongoMemoryServer } = require('mongodb-memory-server');
-      mongodInstance = await MongoMemoryServer.create();
-      mongoUri = mongodInstance.getUri();
-      console.log(`📦 Embedded MongoDB started at: ${mongoUri}`);
+      throw new Error('MONGODB_URI is not set in environment variables. Please check your .env or hosting environment variables.');
     }
 
     await mongoose.connect(mongoUri);
@@ -28,9 +19,6 @@ async function connectDB() {
 async function closeDB() {
   if (mongoose.connection.readyState !== 0) {
     await mongoose.disconnect();
-  }
-  if (mongodInstance) {
-    await mongodInstance.stop();
   }
 }
 

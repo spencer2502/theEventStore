@@ -69,10 +69,6 @@ const orderSchema = new mongoose.Schema(
       enum: ['pending', 'confirmed', 'cancelled'],
       default: 'pending',
     },
-    telegramNotified: {
-      type: Boolean,
-      default: false,
-    },
     notes: {
       type: String,
       default: '',

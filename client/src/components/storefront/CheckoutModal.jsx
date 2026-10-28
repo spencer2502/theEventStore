@@ -74,8 +74,8 @@ export default function CheckoutModal({ isOpen, onClose, onSuccess }) {
 
         // Trigger celebratory confetti
         confetti({
-          particleCount: 80,
-          spread: 70,
+          particleCount: 60,
+          spread: 60,
           origin: { y: 0.6 },
         });
 
@@ -109,65 +109,65 @@ export default function CheckoutModal({ isOpen, onClose, onSuccess }) {
     <Modal
       isOpen={isOpen}
       onClose={handleResetAndClose}
-      title={completedOrder ? 'Enquiry Submitted! 🎉' : 'Instant Checkout & Enquiry'}
+      title={completedOrder ? 'Enquiry Confirmed' : 'Prop Reservation Enquiry'}
       maxWidth="max-w-xl"
     >
       {completedOrder ? (
         /* Order Confirmation View */
         <div className="space-y-5 text-center py-2 animate-in fade-in">
-          <div className="w-16 h-16 mx-auto rounded-full bg-lime border-3 border-ink flex items-center justify-center shadow-funky">
-            <CheckCircle2 size={36} className="text-ink" strokeWidth={2.5} />
+          <div className="w-14 h-14 mx-auto rounded-full bg-[#FFF5F5] border border-[#E8D0D0] flex items-center justify-center text-[#B21818]">
+            <CheckCircle2 size={30} />
           </div>
 
           <div>
-            <h4 className="font-heading font-extrabold text-2xl text-ink">
+            <h4 className="font-heading font-bold text-xl text-[#1A181E]">
               Thank you, {completedOrder.customerName}!
             </h4>
-            <p className="text-sm font-bold text-pink mt-1">
-              Order Ref: #{completedOrder.orderNumber}
+            <p className="text-xs font-semibold text-[#B21818] mt-1">
+              Booking Ref: #{completedOrder.orderNumber}
             </p>
             {completedOrder.customerAddress && (
-              <p className="text-xs text-gray-700 font-semibold mt-1">
+              <p className="text-xs text-gray-600 mt-1">
                 📍 {completedOrder.customerAddress}
               </p>
             )}
-            <p className="text-xs text-gray-700 mt-2 max-w-md mx-auto leading-relaxed">
-              Your prop enquiry has been logged into our system and automatically sent to our team's Telegram channel.
+            <p className="text-xs text-gray-500 mt-2 max-w-md mx-auto leading-relaxed">
+              Your prop enquiry has been logged. Our team has received your details and will coordinate confirmation promptly.
             </p>
           </div>
 
           {/* Primary Call to Action: WhatsApp */}
-          <div className="p-4 rounded-2xl bg-yellow/40 border-3 border-ink shadow-[4px_4px_0px_#161221] text-left">
-            <p className="text-xs font-bold text-ink uppercase tracking-wider mb-2 flex items-center gap-1.5">
-              <MessageCircle size={16} className="text-green-600" /> Fast-Track on WhatsApp:
+          <div className="p-4 rounded-xl bg-[#FAF8F5] border border-gray-200 text-left">
+            <p className="text-xs font-semibold text-[#1A181E] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+              <MessageCircle size={15} className="text-emerald-600" /> Fast-Track via WhatsApp:
             </p>
-            <p className="text-xs text-gray-700 mb-3">
-              Click below to send your pre-filled order summary directly to our store's WhatsApp number for instant confirmation!
+            <p className="text-xs text-gray-600 mb-3">
+              Click below to send your pre-filled reservation summary directly to our WhatsApp number for immediate verification.
             </p>
 
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full btn-funky bg-[#25D366] text-white py-3.5 text-base flex items-center justify-center gap-2 hover:bg-[#20bd5a]"
+              className="w-full py-3 rounded-lg bg-[#25D366] text-white hover:bg-[#20bd5a] text-sm font-semibold flex items-center justify-center gap-2 transition-all shadow-sm"
             >
-              <MessageCircle size={20} strokeWidth={2.5} />
+              <MessageCircle size={18} />
               <span>Send Order on WhatsApp</span>
             </a>
           </div>
 
           {/* Itemized summary */}
-          <div className="bg-white p-3.5 rounded-xl border-2 border-ink text-left text-xs space-y-1.5 shadow-[2px_2px_0px_#161221]">
-            <div className="font-bold text-gray-700 pb-1 border-b border-gray-300 flex justify-between">
+          <div className="bg-white p-3.5 rounded-xl border border-gray-200 text-left text-xs space-y-1.5 shadow-sm">
+            <div className="font-semibold text-gray-700 pb-1 border-b border-gray-200 flex justify-between">
               <span>Itemized Summary</span>
               <span>Total: ₹{completedOrder.totalAmount?.toFixed(2)}</span>
             </div>
             {completedOrder.items?.map((it, idx) => (
-              <div key={idx} className="flex justify-between text-gray-800">
+              <div key={idx} className="flex justify-between text-gray-600">
                 <span>
                   {it.name} x {it.quantity}
                 </span>
-                <span className="font-bold">
+                <span className="font-medium text-[#1A181E]">
                   ₹{(it.priceAtOrder * it.quantity).toFixed(2)}
                 </span>
               </div>
@@ -175,21 +175,25 @@ export default function CheckoutModal({ isOpen, onClose, onSuccess }) {
           </div>
 
           <div className="pt-2">
-            <FunkyButton variant="white" size="md" onClick={handleResetAndClose}>
-              Done / Continue Browsing
-            </FunkyButton>
+            <button
+              type="button"
+              onClick={handleResetAndClose}
+              className="px-5 py-2 rounded-lg border border-gray-300 text-xs font-medium text-gray-700 hover:border-gray-400 hover:text-black transition-colors"
+            >
+              Done / Return to Catalog
+            </button>
           </div>
         </div>
       ) : (
         /* Checkout Form View */
         <form onSubmit={handleCheckoutSubmit} className="space-y-4">
-          <p className="text-xs font-semibold text-gray-700 bg-yellow/40 p-2.5 rounded-xl border-2 border-ink">
-            ✨ <strong>No account or card needed!</strong> Just submit your name, phone, and event address. Our team reviews your booking and confirms via WhatsApp & phone.
-          </p>
+          <div className="text-xs text-gray-600 bg-[#FAF8F5] p-3 rounded-xl border border-gray-200">
+            ✨ <strong>No card or upfront payment needed!</strong> Submit your details and our team will verify availability and confirm your booking.
+          </div>
 
           {errorMsg && (
-            <div className="p-3 rounded-xl bg-red-100 border-2 border-[#ff4d4d] text-ink text-xs font-bold flex items-start gap-2 shadow-[2px_2px_0px_#161221]">
-              <AlertCircle size={16} className="text-[#ff4d4d] shrink-0 mt-0.5" />
+            <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-800 text-xs font-medium flex items-start gap-2">
+              <AlertCircle size={15} className="text-red-600 shrink-0 mt-0.5" />
               <div>
                 <p>{errorMsg}</p>
                 {stockErrors.length > 0 && (
@@ -205,7 +209,7 @@ export default function CheckoutModal({ isOpen, onClose, onSuccess }) {
 
           {/* Form Inputs */}
           <div>
-            <label className="block text-xs font-extrabold text-ink uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
               Your Full Name *
             </label>
             <input
@@ -214,12 +218,12 @@ export default function CheckoutModal({ isOpen, onClose, onSuccess }) {
               placeholder="e.g. Maya Patel"
               value={customerName}
               onChange={(e) => setCustomerName(e.target.value)}
-              className="w-full funky-input text-sm"
+              className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-[#B21818] transition-colors"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-extrabold text-ink uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
               Phone / WhatsApp Number *
             </label>
             <input
@@ -228,12 +232,12 @@ export default function CheckoutModal({ isOpen, onClose, onSuccess }) {
               placeholder="e.g. +91 98765 43210"
               value={customerPhone}
               onChange={(e) => setCustomerPhone(e.target.value)}
-              className="w-full funky-input text-sm"
+              className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-[#B21818] transition-colors"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-extrabold text-ink uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
               Event Venue / Delivery Address *
             </label>
             <textarea
@@ -242,38 +246,38 @@ export default function CheckoutModal({ isOpen, onClose, onSuccess }) {
               placeholder="e.g. Banquet Hall A, Royal Orchid Resort, MG Road, Bengaluru"
               value={customerAddress}
               onChange={(e) => setCustomerAddress(e.target.value)}
-              className="w-full funky-input text-sm resize-none"
+              className="w-full px-3.5 py-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-[#B21818] transition-colors resize-none"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-extrabold text-ink uppercase tracking-wider mb-1">
-              Event Date / Special Notes (Optional)
+            <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
+              Event Date / Special Instructions (Optional)
             </label>
             <textarea
               rows={2}
               placeholder="e.g. Wedding reception on 28th October, require setup by 4 PM."
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="w-full funky-input text-sm resize-none"
+              className="w-full px-3.5 py-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-[#B21818] transition-colors resize-none"
             />
           </div>
 
           {/* Order Summary Pill */}
-          <div className="p-3 rounded-xl bg-white border-2 border-ink shadow-[2px_2px_0px_#161221] flex items-center justify-between">
+          <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-gray-200 flex items-center justify-between">
             <div>
-              <span className="text-xs font-bold text-gray-500 block">
-                Order Items ({items.length} props)
+              <span className="text-[11px] font-medium text-gray-500 uppercase tracking-wider block">
+                Selected Props ({items.length})
               </span>
-              <span className="text-xs text-gray-700">
+              <span className="text-xs text-gray-700 line-clamp-1 font-medium">
                 {items.map((i) => `${i.name} (x${i.quantity})`).join(', ')}
               </span>
             </div>
             <div className="text-right pl-3 shrink-0">
-              <span className="text-[10px] font-bold text-gray-500 block uppercase">
-                Est. Total
+              <span className="text-[10px] font-medium text-gray-500 uppercase block">
+                Estimated Total
               </span>
-              <span className="font-heading font-extrabold text-xl text-ink">
+              <span className="font-heading font-bold text-lg text-[#1A181E]">
                 ₹{cartTotal.toFixed(2)}
               </span>
             </div>
@@ -285,7 +289,7 @@ export default function CheckoutModal({ isOpen, onClose, onSuccess }) {
               type="button"
               onClick={onClose}
               disabled={submitting}
-              className="btn-funky bg-white text-ink px-4 py-3 text-sm flex-1"
+              className="px-4 py-2.5 rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 text-xs font-medium flex-1 transition-colors"
             >
               Back to Cart
             </button>
@@ -293,17 +297,17 @@ export default function CheckoutModal({ isOpen, onClose, onSuccess }) {
             <button
               type="submit"
               disabled={submitting || items.length === 0}
-              className="btn-funky bg-lime text-ink px-6 py-3 text-sm font-extrabold flex-[2] flex items-center justify-center gap-2"
+              className="px-6 py-2.5 rounded-lg bg-[#B21818] text-white hover:bg-[#8F1313] text-sm font-semibold flex-[2] flex items-center justify-center gap-2 transition-all shadow-sm disabled:opacity-50"
             >
               {submitting ? (
                 <>
-                  <Loader2 size={18} className="animate-spin" />
-                  <span>Validating Stock...</span>
+                  <Loader2 size={16} className="animate-spin" />
+                  <span>Submitting...</span>
                 </>
               ) : (
                 <>
                   <span>Submit Order Enquiry</span>
-                  <ArrowRight size={18} strokeWidth={3} />
+                  <ArrowRight size={16} />
                 </>
               )}
             </button>

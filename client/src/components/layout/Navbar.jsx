@@ -27,8 +27,8 @@ export default function Navbar() {
   const isCurrent = (path) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-panel-bg border-b-3 border-ink shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3.5 flex items-center justify-between">
+    <header className="sticky top-0 z-40 w-full bg-white border-b border-[#EAE5DF] shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3 flex items-center justify-between">
         {/* Brand Logo */}
         <Link to="/" className="flex items-center gap-2 group py-0.5">
           <img
@@ -44,10 +44,10 @@ export default function Navbar() {
             <Link
               key={cat.path}
               to={cat.path}
-              className={`px-3 py-1.5 rounded-full font-heading font-bold text-sm transition-all border-2 ${
+              className={`px-3.5 py-1.5 rounded-full font-semibold text-sm transition-all ${
                 isCurrent(cat.path)
-                  ? "bg-yellow text-ink border-ink shadow-[2px_2px_0px_#161221]"
-                  : "border-transparent text-ink hover:bg-white hover:border-ink hover:shadow-[2px_2px_0px_#161221]"
+                  ? "bg-[#B21818] text-white shadow-sm"
+                  : "text-gray-700 hover:text-[#B21818] hover:bg-[#FDF4F4]"
               }`}
             >
               {cat.name}
@@ -61,12 +61,12 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setIsCartOpen(true)}
-            className="btn-funky bg-lime text-ink px-3.5 sm:px-4 py-2 text-sm flex items-center gap-2"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#B21818] text-white text-sm font-bold hover:bg-[#8E1313] transition-all shadow-sm"
             aria-label={`View cart with ${cartCount} items`}
           >
-            <ShoppingBag size={18} strokeWidth={2.5} />
-            <span className="hidden sm:inline font-extrabold">Cart</span>
-            <span className="w-6 h-6 rounded-full bg-pink text-white text-xs font-extrabold border-2 border-ink flex items-center justify-center shadow-[1px_1px_0px_#161221]">
+            <ShoppingBag size={17} strokeWidth={2.2} />
+            <span className="hidden sm:inline">Cart</span>
+            <span className="w-5 h-5 rounded-full bg-white text-[#B21818] text-xs font-extrabold flex items-center justify-center">
               {cartCount}
             </span>
           </button>
@@ -76,29 +76,30 @@ export default function Navbar() {
             to={isAuthenticated ? "/admin/dashboard" : "/admin/login"}
             className="hidden sm:inline-flex"
           >
-            <FunkyButton
-              variant={isAuthenticated ? "pink" : "white"}
-              size="sm"
-              className="text-xs"
+            <button
+              type="button"
+              className={`px-3.5 py-2 rounded-full text-xs font-semibold border transition-all flex items-center gap-1.5 ${
+                isAuthenticated
+                  ? "bg-[#FDF4F4] text-[#B21818] border-[#F6D8D8]"
+                  : "bg-white text-gray-700 border-gray-300 hover:border-[#B21818] hover:text-[#B21818]"
+              }`}
             >
               {isAuthenticated ? (
                 <>
                   <UserCheck size={14} />
-                  <span>Portal ({user?.role})</span>
+                  <span>Portal</span>
                 </>
               ) : (
-                <>
-                  <span>Admin Login</span>
-                </>
+                <span>Admin Login</span>
               )}
-            </FunkyButton>
+            </button>
           </Link>
 
           {/* Mobile Menu Button */}
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden w-10 h-10 rounded-xl bg-white border-2 border-ink flex items-center justify-center shadow-[2px_2px_0px_#161221]"
+            className="lg:hidden w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-gray-700 hover:text-[#B21818] hover:border-[#B21818] transition-colors"
             aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -108,34 +109,34 @@ export default function Navbar() {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden w-full bg-panel-bg border-t-3 border-ink px-4 py-5 shadow-funky animate-in slide-in-from-top-2">
+        <div className="lg:hidden w-full bg-white border-t border-gray-200 px-4 py-5 shadow-lg animate-in slide-in-from-top-2">
           <div className="flex flex-col gap-2">
-            <span className="text-xs font-extrabold text-gray-500 uppercase tracking-wider px-2">
-              Categories
+            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider px-2">
+              Browse Categories
             </span>
             {NAV_CATEGORIES.map((cat) => (
               <Link
                 key={cat.path}
                 to={cat.path}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`px-4 py-2 rounded-xl font-heading font-bold text-base border-2 ${
+                className={`px-4 py-2.5 rounded-xl font-semibold text-sm transition-all ${
                   isCurrent(cat.path)
-                    ? "bg-yellow text-ink border-ink shadow-[2px_2px_0px_#161221]"
-                    : "bg-white border-ink text-ink hover:bg-lime/30"
+                    ? "bg-[#B21818] text-white"
+                    : "text-gray-800 hover:bg-[#FDF4F4] hover:text-[#B21818]"
                 }`}
               >
                 {cat.name}
               </Link>
             ))}
 
-            <div className="pt-3 mt-2 border-t-2 border-ink flex flex-col gap-2">
+            <div className="pt-3 mt-2 border-t border-gray-200 flex flex-col gap-2">
               <Link
                 to={isAuthenticated ? "/admin/dashboard" : "/admin/login"}
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-center py-2.5 rounded-full font-heading font-extrabold text-sm border-2 border-ink bg-purple text-white shadow-[2px_2px_0px_#161221]"
+                className="w-full text-center py-2.5 rounded-full font-bold text-sm bg-gray-100 text-gray-800 hover:bg-[#B21818] hover:text-white transition-all"
               >
                 {isAuthenticated
-                  ? `Admin Portal (${user?.role})`
+                  ? "Admin Dashboard Portal"
                   : "Admin Login"}
               </Link>
             </div>
